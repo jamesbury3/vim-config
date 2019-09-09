@@ -1,5 +1,6 @@
 source $VIMRUNTIME/vimrc_example.vim
 
+execute pathogen#infect()
 syntax on
 filetype plugin indent on
 syntax enable
@@ -18,9 +19,18 @@ set lazyredraw
 set showmatch
 inoremap jk <esc>
 set number
-set guifont=Consolas:h11
+set guifont=Consolas:h9
 colorscheme darkblue
 set autochdir
+set statusline=
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+colorscheme gruvbox
+set bg=dark
+set columns=200
+set lines=50
+set belloff=all
 
 set diffexpr=MyDiff()
 function MyDiff()
