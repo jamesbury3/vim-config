@@ -17,15 +17,46 @@ set wrap
 set showcmd
 set lazyredraw
 set showmatch
+set expandtab
 inoremap jk <esc>
+map <C-o> :NERDTreeToggle<CR>
 set number
 set guifont=Consolas:h9
 colorscheme darkblue
 set autochdir
-set statusline=
+set encoding=utf-8 " For YouCompleteMe
+set laststatus=2
+set t_u7= " Weird workaround
+set t_RV=
+let g:ycm_confirm_extra_conf = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
+" Add closing brackets and other things
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
+inoremap        (  ()<Left>
+inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+
 colorscheme gruvbox
 set bg=dark
 set columns=200
@@ -65,4 +96,3 @@ function MyDiff()
     let &shellxquote=l:shxq_sav
   endif
 endfunction
-
