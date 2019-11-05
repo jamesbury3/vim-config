@@ -18,7 +18,6 @@ set showcmd
 set lazyredraw
 set showmatch
 set expandtab
-inoremap jk <esc>
 map <C-o> :NERDTreeToggle<CR>
 set number
 set guifont=Consolas:h9
@@ -32,6 +31,7 @@ let g:ycm_confirm_extra_conf = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+let g:indentLine_char = '|'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -49,6 +49,10 @@ let g:lightline = {
       \ },
       \ }
 
+" Shell
+set shell=powershell
+set splitbelow
+
 " Add closing brackets and other things
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
@@ -56,9 +60,18 @@ inoremap {{     {
 inoremap {}     {}
 inoremap        (  ()<Left>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap " ""<Left>
+inoremap "" ""
+inoremap ' ''<Left>
+inoremap '' ''
+:command End <$><a><;>
+
+" Indent for python
+inoremap :<CR>  :<CR><Tab>
 
 colorscheme gruvbox
 set bg=dark
+let gruvbox_bold = 1
 set columns=200
 set lines=50
 set belloff=all
